@@ -19,8 +19,8 @@
         }
         body
         {
-        background-color: rgb(174, 174, 174);
-        /* background-image: url(""); */
+        /* background-color: rgb(174, 174, 174); */
+        background-image: url("bg.jpeg");
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
@@ -69,7 +69,9 @@
         .input_text
         {
         height: 30px;
-        width: 100%;
+        width: 90%;
+        padding-left:10px;
+        padding-right: 10px;
         border: 1px solid black;
         border-radius: 20px;
         background-color: rgba(0, 0, 0, 0.1)
@@ -91,6 +93,7 @@
         padding: 10px 20px;
         border: 1px solid;
         border-radius: 20px;
+        background-color: rgba(174, 121, 117, 5);
         }
     </style>
 </head>

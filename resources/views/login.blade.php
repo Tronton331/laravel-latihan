@@ -20,8 +20,8 @@
         }
         body
         {
-            background-color: rgb(174, 174, 174);
-            /* background-image: url(""); */
+            /* background-color: rgb(174, 174, 174); */
+            background-image: url("bg.jpeg");
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
@@ -40,7 +40,7 @@
             left: 50%;                          /*  Bagian kiri berjarak 50%        */
             transform: translate(-50%, -50%);   /*  Tumpuan menjadi di engah object */
 
-            background-color: rgba(0, 0, 0, 0.2);
+            background-color: rgba(0, 0, 0, 0.3);
             padding: 10px 50px;
             height: 360px;
             width: 200px;
@@ -70,10 +70,12 @@
         .input_text
         {
             height: 30px;
-            width: 100%;
+            width: 90%;
+            padding-left: 10px;
+            padding-right: 10px;
             border: 1px solid black;
             border-radius: 20px;
-            background-color: rgba(0, 0, 0, 0.1)
+            background-color: rgba(0, 0, 0, 0.2)
         }
         .password
         {
@@ -87,6 +89,7 @@
             padding: 10px 20px;
             border: 1px solid;
             border-radius: 20px;
+            background-color: rgba(174, 121, 117, 5);
         }
     </style>
 </head>
@@ -105,7 +108,7 @@
             <input type="submit" value="Login" class="button">
         </form>
         {{-- <p>Tidak memiliki akun? <a href="{{ route('register')}}">Daftar sekarang</a></p> --}}
-        <p>Tidak memiliki akun? <a href="/">Daftar sekarang</a></p>
+        <p>Tidak memiliki akun? <a href="/register">Daftar sekarang</a></p>
     </main>
 </body>
 </html>
