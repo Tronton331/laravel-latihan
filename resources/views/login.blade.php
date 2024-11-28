@@ -107,8 +107,7 @@
             </div>
             <input type="submit" value="Login" class="button">
         </form>
-        {{-- <p>Tidak memiliki akun? <a href="{{ route('register')}}">Daftar sekarang</a></p> --}}
-        <p>Tidak memiliki akun? <a href="/register">Daftar sekarang</a></p>
+        <p>Tidak memiliki akun? <a href="{{ route('register')}}">Daftar sekarang</a></p>
     </main>
 </body>
 </html>

@@ -23,4 +23,4 @@ Route::get('/', function () {
 //  access funcion index on file App\Http\Controllers\LoginController
 Route::get('login', [LoginController::class, "index"]);
 
-Route::get("register", [RegisterController::class,"index"]);
+Route::get("register", [RegisterController::class,"index"])->name('register');
