@@ -34,7 +34,7 @@ Route::group(['prefix'=>'v1'], function()
     Route::post('auth/login', [AuthController::class, 'login']);
     Route::group(['middleware'=> 'auth:sanctum'], function()
     {
-        Route::resource('pusers', UserController::class);
+        Route::resource('users', UserController::class);
         Route::post('/auth/logout', [AuthController::class,'logout']);
     });
 });
