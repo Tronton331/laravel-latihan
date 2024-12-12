@@ -36,7 +36,6 @@ class AuthController extends Controller
         {
             return response()->json(["message"=>"Email or password incorrect"], 401);
         }
-        return response()->json(['message'=>'succes']);
     }
 
     public function logout(Request $request)

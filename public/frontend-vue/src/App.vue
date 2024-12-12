@@ -5,7 +5,7 @@
 <template>
     <div>
         <Nav />
-        <h3>Learn Vue Authentication</h3>
+        <RouterView></RouterView>
     </div>
 </template>
 
