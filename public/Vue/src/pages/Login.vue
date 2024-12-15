@@ -36,46 +36,37 @@
         password: ''
     });
 
-    const getToken = async () =>
-    {
-        await axios.get('/sanctum/csrf-cookie');
-    }
-
     const submitLogin = async () =>
     {
-        // await getToken();
         await useAuth.getToken();
-        //! Error 419
         await axios.post('/login',
         {
             email: form.value.email,
             password: form.value.password
         },
-        // {
-        //     headers: {
-        //         accept: 'application/json',
-        //         'X-XSRF-TOKEN': getCookie('XSRF-TOKEN')
-        //     },
-        //     withCredentials: true
-        // }
-        );
-
+        {
+            headers:
+            {
+                accept: 'application/json',
+                'X-XSRF-TOKEN': getCookie('XSRF-TOKEN')
+            },
+        });
         router.push('/');
     }
 
-    // function getCookie(name)
-    // {
-    //     const Decoded = decodeURIComponent(document.cookie);
-    //     const Array = Decoded.split("; ");
-    //     let result = null;
+    function getCookie(name)
+    {
+        const Decoded = decodeURIComponent(document.cookie);
+        const Array = Decoded.split("; ");
+        let result = null;
 
-    //     Array.forEach(element =>
-    //     {
-    //         if (element.indexOf(name) == 0)
-    //         {
-    //             result = element.substring(name.length + 1);
-    //         }
-    //     });
-    //     return result;
-    // }
+        Array.forEach(element =>
+        {
+            if (element.indexOf(name) == 0)
+            {
+                result = element.substring(name.length + 1);
+            }
+        });
+        return result;
+    }
 </script>
