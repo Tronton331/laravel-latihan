@@ -10,14 +10,23 @@
                 <li class="nav-item">
                     <router-link class="nav-link active" aria-current="page" to="/">Home</router-link>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" v-if="!useAuth.user">
                     <router-link class="nav-link" to="Login">Login</router-link>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" v-if="!useAuth.user">
                     <router-link class="nav-link" to="Register" tabindex="-1" aria-disabled="true">Register</router-link>
+                </li>
+                <li class="nav-item" v-if="useAuth.user">
+                    <router-link class="nav-link" to="#" tabindex="-1" aria-disabled="true">Logout</router-link>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
 </template>
+
+<script setup>
+    import { authStore } from '../stores/authstore'
+
+    const useAuth = authStore();
+</script>
