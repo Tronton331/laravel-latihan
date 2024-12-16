@@ -17,10 +17,8 @@
 
     const userAuth = authStore();
 
-    const user = ref();
-
     onMounted(async () =>
     {
-        userAuth.getUser();
+        await userAuth.getUser();
     });
 </script>

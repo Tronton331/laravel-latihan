@@ -2,6 +2,9 @@
     <div class="container">
         <div class="col-md-6 m-auto">
             <h1>Login page</h1>
+            <div class="mt-3" style="color: red;">
+                {{ errorMessage }}
+            </div>
             <div class="mt-3">
                 <form @submit.prevent="submitLogin">
                     <div class="mb-3">
@@ -26,6 +29,7 @@
     import axios from 'axios'
     import { useRouter } from 'vue-router'
     import { authStore } from '../stores/authstore'
+    import cookie from '../utils/Cookie'
 
     const router = useRouter();
     const useAuth = authStore();
@@ -35,6 +39,8 @@
         email: '',
         password: ''
     });
+
+    const errorMessage = ref();
 
     const submitLogin = async () =>
     {
@@ -48,25 +54,17 @@
             headers:
             {
                 accept: 'application/json',
-                'X-XSRF-TOKEN': getCookie('XSRF-TOKEN')
+                'X-XSRF-TOKEN': cookie.getCookie('XSRF-TOKEN')
             },
-        });
-        router.push('/');
-    }
-
-    function getCookie(name)
-    {
-        const Decoded = decodeURIComponent(document.cookie);
-        const Array = Decoded.split("; ");
-        let result = null;
-
-        Array.forEach(element =>
+        }).then(response =>
         {
-            if (element.indexOf(name) == 0)
-            {
-                result = element.substring(name.length + 1);
-            }
+            router.push('/');
+            errorMessage.value = response.data.message;
+            console.log("[Login] Success");
+        }).catch(error =>
+        {
+            errorMessage.value = error.response.data.message;
+            console.error("[Login] Error: ", error.response.data.message);
         });
-        return result;
     }
 </script>
