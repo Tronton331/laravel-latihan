@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container mt-5">
         <div class="col-md-6 m-auto">
             <h1>Login page</h1>
             <div class="mt-3" style="color: red;">

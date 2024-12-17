@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container mt-5">
         <h1>Home page</h1>
         <div v-if="userAuth.user">
             <h3>{{ userAuth.user.name }}</h3>
