@@ -1,8 +1,13 @@
 <script setup>
     import Nav from "./components/Nav.vue"
+    import { onMounted } from "vue";
+
+    onMounted(() => {
+        document.documentElement.setAttribute("data-bs-theme", "dark");
+    });
 </script>
 
-<template>
+<template> 
     <div>
         <Nav />
         <RouterView></RouterView>
