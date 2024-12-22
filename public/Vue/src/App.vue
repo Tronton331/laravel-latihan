@@ -7,7 +7,7 @@
     });
 </script>
 
-<template> 
+<template>
     <div>
         <Nav />
         <RouterView></RouterView>

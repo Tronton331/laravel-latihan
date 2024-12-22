@@ -9,7 +9,7 @@
                 <form @submit.prevent="submitLogin">
                     <div class="mb-3">
                         <label for="EmailLoginFormInput" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="EmailLoginFormInput" v-model="form.email" autocomplete="username" placeholder="name@example.com">
+                        <input type="email" class="form-control" id="EmailLoginFormInput" v-model="form.email" autocomplete="email" placeholder="name@example.com">
                     </div>
                     <div class="mb-3">
                         <label for="PasswordLoginFormInput" class="form-label">Password</label>
@@ -58,8 +58,10 @@
             },
         }).then(response =>
         {
-            router.push('/');
-            errorMessage.value = response.data.message;
+            if (response.status === 204)
+            {
+                router.push('/');
+            }            errorMessage.value = response.data.message;
             console.log("[Login] Success");
         }).catch(error =>
         {
