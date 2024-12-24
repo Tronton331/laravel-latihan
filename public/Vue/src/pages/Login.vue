@@ -32,7 +32,6 @@
     import cookie from '../utils/Cookie'
 
     const router = useRouter();
-    const useAuth = authStore();
 
     const form =  ref(
     {
@@ -42,31 +41,13 @@
 
     const errorMessage = ref();
 
-    const submitLogin = async () =>
+    const submitLogin = () =>
     {
-        await useAuth.getToken();
-        await axios.post('/login',
-        {
-            email: form.value.email,
-            password: form.value.password
-        },
-        {
-            headers:
-            {
-                accept: 'application/json',
-                'X-XSRF-TOKEN': cookie.getCookie('XSRF-TOKEN')
-            },
-        }).then(response =>
-        {
-            if (response.status === 204)
-            {
-                router.push('/');
-            }            errorMessage.value = response.data.message;
-            console.log("[Login] Success");
-        }).catch(error =>
-        {
-            errorMessage.value = error.response.data.message;
-            console.error("[Login] Error: ", error.response.data.message);
-        });
+        authStore().login(form.value.email, form.value.password).then(res => {
+            router.push("/")
+        }, error => {
+            alert("Login Error")
+        })
+
     }
 </script>

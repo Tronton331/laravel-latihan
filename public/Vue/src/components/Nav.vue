@@ -10,13 +10,13 @@
                 <li class="nav-item">
                     <router-link class="nav-link" active-class="active" aria-current="page" to="/">Home</router-link>
                 </li>
-                <li class="nav-item" v-if="!useAuth.user">
+                <li class="nav-item" v-if="!authStore().token">
                     <router-link class="nav-link" active-class="active" to="Login">Login</router-link>
                 </li>
-                <li class="nav-item" v-if="!useAuth.user">
+                <li class="nav-item" v-if="!authStore().token">
                     <router-link class="nav-link" active-class="active" to="Register" tabindex="-1" aria-disabled="true">Register</router-link>
                 </li>
-                <li class="nav-item" v-if="useAuth.user">
+                <li class="nav-item" v-if="authStore().token">
                     <router-link class="nav-link" to="/login" tabindex="-1" aria-disabled="true">
                         <span @click="$event => logout()">Logout</span>
                     </router-link>
@@ -29,18 +29,9 @@
 
 <script setup>
     import { authStore } from '../stores/authstore'
-    import cookie from '../utils/Cookie'
 
-    const useAuth = authStore();
-    // const deleteCookie = () =>
-    // {
-    //     cookie.deleteCookie('laravel_session');
-    //     cookie.deleteCookie('user');
-    // }
     const logout = () =>
     {
-        // cookie.getCookie('XSRF-TOKEN');
-        useAuth.logout();
-        // deleteCookie();
+        authStore().logout();
     }
 </script>

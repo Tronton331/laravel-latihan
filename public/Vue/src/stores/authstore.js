@@ -2,43 +2,87 @@ import { defineStore } from "pinia";
 import axios from "axios";
 import cookie from "../utils/Cookie";
 
+const getToken = () =>
+{
+    let token = localStorage.getItem('token');
+    if ( token )
+    {
+        return JSON.parse(token)
+    }
+    else{
+        return null
+    }
+}
+
+const getUser = () =>
+{
+    let user = localStorage.getItem('user');
+    if ( user )
+    {
+        return JSON.parse(user)
+    }
+    else{
+        return null
+    }
+}
+
 export const authStore = defineStore("auth",
 {
     state: () =>
     ({
-        authUser: null
+        authUser: getUser(),
+        authToken: getToken()
     }),
 
     getters:
     {
-        user: (state) => state.authUser
+        user: (state) => state.authUser,
+        token: (state) => state.authToken
     },
 
     actions:
     {
-        async getToken()
+        login(email, password)
         {
-            await axios.get('/sanctum/csrf-cookie');
+            return new Promise( (resolve, reject) => {
+                axios.post('/api/v1/auth/login',
+                {
+                    email,
+                    password
+                },
+                {
+                    headers:
+                    {
+                        accept: 'application/json',
+                    },
+                }).then(response =>
+                {
+                    this.authToken = response.data.user.accessToken
+                    this.authUser = response.data.user
+                    localStorage.setItem( 'token', JSON.stringify(response.data.user.accessToken) );
+                    localStorage.setItem('user', JSON.stringify(response.data.user));
+                    resolve(response.data);
+                }).catch(error =>
+                    {
+                        reject(error);
+                    });
+            } )
         },
-        async getUser()
-        {
-            const data = await axios.get('/api/user');
-            this.authUser = data.data;
-        },
+
         async logout()
         {
-            await this.getToken();
-            await axios.post('/logout',
-            {},
+            await axios.post('/api/v1/auth/logout',
             {
                 headers:
                 {
                     accept: 'application/json',
-                    'X-XSRF-TOKEN': cookie.getCookie('XSRF-TOKEN')
+                    'Authorization': `Bearer ${getToken()}`
                 },
             });
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            this.authToken = null;
             this.authUser = null;
-            console.log("[Logout] Success")
         }
     }
 });

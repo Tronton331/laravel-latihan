@@ -1,12 +1,24 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 import Home from "../pages/Home.vue";
+import { authStore } from "../stores/authstore"
 
 const routes = [
     {
         path: '/',
         name: 'Home',
-        component: Home
+        component: Home,
+        // Klo blm login, paksa login
+        meta: { requiresAuth: true },
+        beforeEnter: (to, from, next) => {
+            console.debug(authStore().token)
+            if (!authStore().token) {
+                next('/login');
+            } else {
+                next();
+            }
+        }
+
     },
     {
         path: '/login',
