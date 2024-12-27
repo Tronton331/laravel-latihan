@@ -11,11 +11,6 @@
     import axios from 'axios';
     import { authStore } from '../stores/authstore'
 
-    onMounted(async () =>
-    {
-
-    });
-
     // Ambil data
     // await axios.get('api/v1/users',
     // {

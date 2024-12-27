@@ -1,6 +1,5 @@
 import { defineStore } from "pinia";
 import axios from "axios";
-import cookie from "../utils/Cookie";
 
 const getToken = () =>
 {
@@ -42,6 +41,7 @@ export const authStore = defineStore("auth",
 
     actions:
     {
+        // Login
         login(email, password)
         {
             return new Promise( (resolve, reject) => {
@@ -69,6 +69,7 @@ export const authStore = defineStore("auth",
             } )
         },
 
+        // Logout
         async logout()
         {
             await axios.post('/api/v1/auth/logout',
