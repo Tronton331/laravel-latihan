@@ -26,7 +26,9 @@
 </template>
 
 <script setup>
-    import { ref } from 'vue';
+    import { ref, onMounted } from 'vue';
+
+    const quetion = ref()
 
     const items = ref([{ message: 'Foo' }, { message: 'Bar' }, { message: 'Bar' }, { message: 'Bar' }, { message: 'Bar' }, { message: 'Bar' }])
 </script>

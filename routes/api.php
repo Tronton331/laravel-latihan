@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\{RegisterController, UserController};
+use App\Http\Controllers\Api\{RegisterController, UserController, QuetionController};
 use App\Http\Controllers\Api\V1\AuthController;
 
 /*
@@ -22,15 +22,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('register', [RegisterController::class,'store']);
 
-// Route::get('users', [UserController::class,'index']);
-// Route::post('users', [UserController::class,'store']);
-// Route::put('users/{user}', [UserController::class,'update']);
-// Route::delete('users/{user}', [UserController::class,'destroy']);
-
-// Route::resource('users', UserController::class);
-
 Route::group(['prefix'=>'v1'], function()
 {
+    Route::get('quetions', [QuetionController::class, 'index']);
     Route::post('auth/login', [AuthController::class, 'login']);
     Route::group(['middleware'=> 'auth:sanctum'], function()
     {
