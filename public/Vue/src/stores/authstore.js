@@ -63,9 +63,9 @@ export const authStore = defineStore("auth",
                     localStorage.setItem('user', JSON.stringify(response.data.user));
                     resolve(response.data);
                 }).catch(error =>
-                    {
-                        reject(error);
-                    });
+                {
+                    reject(error);
+                });
             } )
         },
 
