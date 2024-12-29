@@ -11,9 +11,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(item, index) in items" :key="index">
+                    <tr v-for="(data, index) in quetions" :key="data.id">
                         <td scope="row" class="text-end">{{ index + 1 }}</td>
-                        <td>{{ item.message }}</td>
+                        <td>{{ data.question }}</td>
                         <td class="d-flex">
                             <button class="ms-1 mb-1 btn btn-primary btn-sm d-flex align-items-center w-1" style="width: 6em;"><i class="bi-trash"></i><span class="ms-1">Delete</span></button>
                             <button class="ms-1 mb-1 btn btn-primary btn-sm d-flex align-items-center w-1" style="width: 6em;"><i class="bi-pencil"></i><span class="ms-1">Edit</span></button>
@@ -27,8 +27,9 @@
 
 <script setup>
     import { ref, onMounted } from 'vue';
+    import useQuetions from '../stores/quetionStore'
 
-    const quetion = ref()
+    const {quetions, getQuetions} = useQuetions();
 
-    const items = ref([{ message: 'Foo' }, { message: 'Bar' }, { message: 'Bar' }, { message: 'Bar' }, { message: 'Bar' }, { message: 'Bar' }])
+    onMounted(() => getQuetions())
 </script>
