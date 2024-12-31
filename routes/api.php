@@ -24,7 +24,7 @@ Route::post('register', [RegisterController::class,'store']);
 
 Route::group(['prefix'=>'v1'], function()
 {
-    Route::get('quetions', [QuetionController::class, 'index']);
+    Route::resource('quetions', QuetionController::class);
     Route::post('auth/login', [AuthController::class, 'login']);
     Route::group(['middleware'=> 'auth:sanctum'], function()
     {

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Quetion extends Model
 {
     protected $fillable = [
-        'quetion'
+        'question'
     ];
 
     use HasFactory;

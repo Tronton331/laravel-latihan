@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Quetion;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\Controller;
+use Validator;
 
 class QuetionController extends Controller
 {
@@ -13,16 +15,8 @@ class QuetionController extends Controller
      */
     public function index()
     {
-        $quetion = Quetion::get();
-        return response()->json(["message"=>"success", "Quetions"=>$quetion], 200);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        $question = Quetion::get();
+        return response()->json(["message"=>"success", "Quetions"=>$question], 200);
     }
 
     /**
@@ -30,23 +24,14 @@ class QuetionController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
+        $validator = Validator::make($request->all(), [
+            "question"=>"required"
+        ]);
+        if($validator->fails()) return response()->json(["message"=>"Invalid Field", "error"=>$validator->errors()], 422);
+        $input = $request->all();
+        $question = Quetion::create($input);
+        Log::info($question);
+        return response()->json(["message"=>"success", "Quetion"=>$question], 201);
     }
 
     /**
